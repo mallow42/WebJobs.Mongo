@@ -6,10 +6,9 @@ This repo contains [MongoDB](https://www.mongodb.com/) binding extensions for th
 
 ### Input binding
 
-Can be used to obtain one document via it's ID.
+Example azure function that can be used to obtain one document via it's ID.
 
 ```csharp
-// Runs once every 5 minutes
 public static Task<IActionResult> GetDocumentById
 (
     [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)] HttpRequest req,
@@ -27,7 +26,7 @@ public static Task<IActionResult> GetDocumentById
 
 ### Output binding
 
-Can be used to create multiple new documents.
+Example azure function that can be used to create multiple new documents.
 
 ```csharp
 public static async Task<IActionResult> InsertNewDocuments
