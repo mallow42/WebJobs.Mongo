@@ -1,6 +1,6 @@
 # Azure Functions MongoDB Extensions
 
-This repo contains [MongoDB](https://www.mongodb.com/) binding extensions for the **Azure WebJobs SDK**. See the [Azure WebJobs SDK repo](https://github.com/Azure/azure-webjobs-sdk) for more information. The binding extensions in this repo are available as the **Mallow.WebJobs.Mongo** nuget package.
+This repo contains [MongoDB](https://www.mongodb.com/) binding extensions for the **Azure WebJobs SDK**. See the [Azure WebJobs SDK repo](https://github.com/Azure/azure-webjobs-sdk) for more information. The binding extensions in this repo are available as the **Mallow.WebJobs.Mongo** [nuget package](https://www.nuget.org/packages/Mallow.WebJobs.Mongo/).
 
 ## Usage
 
