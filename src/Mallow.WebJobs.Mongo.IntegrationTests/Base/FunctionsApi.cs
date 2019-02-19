@@ -7,7 +7,7 @@ namespace Mallow.WebJobs.Mongo.IntegrationTests.Base
 {
     internal class FunctionsApi
     {
-        private const string BASE_URL = "http://localhost:7071/api";
+        private const string BASE_URL = "http://localhost:8080/api";
 
         public Task<RequestResult> GetDocumentByObjectId(string collectionName, ObjectId documentId)
         {
