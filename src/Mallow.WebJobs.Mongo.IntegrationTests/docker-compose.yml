@@ -1,0 +1,14 @@
+version: '3'
+services:
+  functions:
+    build: ../Mallow.WebJobs.Mongo.IntegrationTests.Functions
+    environment:
+      - "MongoDatabaseId=IntegrationTestsDB"
+      - "MongoConnectionString=mongodb://mongo:27017"
+      - "AzureWebJobsStorage=UseDevelopmentStorage=true"
+    ports:
+      - "8080:80"
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
