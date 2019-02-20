@@ -5,11 +5,17 @@ VisualStudioVersion = 15.0.28010.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mallow.WebJobs.Mongo", "Mallow.WebJobs.Mongo\Mallow.WebJobs.Mongo.csproj", "{96173673-6D9F-4116-9A71-332BDBA11807}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mallow.WebJobs.Mongo.UnitTests", "Mallow.WebJobs.Mongo.UnitTests\Mallow.WebJobs.Mongo.UnitTests.csproj", "{4F39C1CB-B99A-4219-80EA-9CB0FAF67941}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mallow.WebJobs.Mongo.UnitTests", "Mallow.WebJobs.Mongo.UnitTests\Mallow.WebJobs.Mongo.UnitTests.csproj", "{4F39C1CB-B99A-4219-80EA-9CB0FAF67941}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mallow.WebJobs.Mongo.IntegrationTests", "Mallow.WebJobs.Mongo.IntegrationTests\Mallow.WebJobs.Mongo.IntegrationTests.csproj", "{BF824337-83B9-439F-8211-520E2AB08F9B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mallow.WebJobs.Mongo.IntegrationTests", "Mallow.WebJobs.Mongo.IntegrationTests\Mallow.WebJobs.Mongo.IntegrationTests.csproj", "{BF824337-83B9-439F-8211-520E2AB08F9B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mallow.WebJobs.Mongo.IntegrationTests.Functions", "Mallow.WebJobs.Mongo.IntegrationTests.Functions\Mallow.WebJobs.Mongo.IntegrationTests.Functions.csproj", "{CDA88FF1-40BE-4AC5-8F30-9C81778B9B0E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mallow.WebJobs.Mongo.IntegrationTests.Functions", "Mallow.WebJobs.Mongo.IntegrationTests.Functions\Mallow.WebJobs.Mongo.IntegrationTests.Functions.csproj", "{CDA88FF1-40BE-4AC5-8F30-9C81778B9B0E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5642F5F2-F7CF-4E2C-87C8-539939EEEBFD}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		build.cake = build.cake
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
