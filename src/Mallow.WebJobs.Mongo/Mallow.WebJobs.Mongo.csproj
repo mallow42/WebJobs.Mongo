@@ -7,7 +7,7 @@
     <Authors>Mallow42</Authors>
     <Description>Provides basic bindigs for MongoDB</Description>
     <PackageProjectUrl>https://github.com/mallow42/WebJobs.Mongo</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/mallow42/WebJobs.Mongo</RepositoryUrl>
+    <RepositoryUrl>https://github.com/mallow42/WebJobs.Mongo.git</RepositoryUrl>
     <PackageLicenseUrl>https://github.com/mallow42/WebJobs.Mongo/blob/master/LICENSE</PackageLicenseUrl>
     <Title>Mallow.WebJobs.Mongo</Title>
     <RepositoryType>git</RepositoryType>
