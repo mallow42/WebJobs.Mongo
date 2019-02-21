@@ -1,9 +1,8 @@
 using System.Net;
-using Newtonsoft.Json.Linq;
 
 namespace Mallow.WebJobs.Mongo.IntegrationTests.Base
 {
-    internal class RequestResult
+    internal class RequestResult<T>
     {
         public string ErrorMessage { get; }
         
@@ -11,9 +10,9 @@ namespace Mallow.WebJobs.Mongo.IntegrationTests.Base
         
         public bool IsSuccessStatusCode { get; }
         
-        public JObject Content { get; }
+        public T Content { get; }
 
-        public RequestResult(JObject content, HttpStatusCode resultStatusCode)
+        public RequestResult(T content, HttpStatusCode resultStatusCode)
         {
             IsSuccessStatusCode = true;
             Content = content;
