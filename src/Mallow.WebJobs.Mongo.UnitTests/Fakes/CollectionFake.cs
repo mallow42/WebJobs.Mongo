@@ -15,10 +15,22 @@ namespace Mallow.WebJobs.Mongo.UnitTests.Fakes
         private const string ID_FIELD = "_id";
         
         private readonly IList<BsonDocument> _documents = new List<BsonDocument>();
+        private readonly IDictionary<string, IEnumerable<BsonDocument>> _filteredDocuments = new Dictionary<string, IEnumerable<BsonDocument>>();
 
         public IEnumerable<BsonDocument> Documents => _documents;
 
-        public Task<BsonDocument> FindOneOrDefaultAsync(FilterDefinition<BsonDocument> filter, CancellationToken token)
+        public Task<List<BsonDocument>> FindAsync(FilterDefinition<BsonDocument> filter, CancellationToken token)
+        {
+            if (_filteredDocuments.ContainsKey(filter.ToJson()))
+            {
+                return Task.FromResult(_filteredDocuments[filter.ToJson()].ToList());
+            }
+
+            return Task.FromResult(new List<BsonDocument>());
+        }
+
+        public Task<BsonDocument> FindOneOrDefaultAsync(FilterDefinition<BsonDocument> filter,
+            CancellationToken token)
         {
             var temp = filter.Render(new BsonDocumentSerializer(), BsonSerializer.SerializerRegistry);
             if (temp.Contains(ID_FIELD))
@@ -44,6 +56,11 @@ namespace Mallow.WebJobs.Mongo.UnitTests.Fakes
         {
             var bsonDocument = data.ToBsonDocument();
             _documents.Add(EnsureId(bsonDocument));
+        }
+        
+        public void AddDocuments(FilterDefinition<BsonDocument> filter, params object[] data)
+        {
+            _filteredDocuments.Add(filter.ToJson(), data.Select(d => d.ToBsonDocument()));
         }
 
         private static BsonDocument EnsureId(BsonDocument bsonDocument)

@@ -38,6 +38,13 @@ namespace Mallow.Azure.WebJobs.Extensions.Mongo
         /// </summary>
         [AutoResolve]
         public string Id { get; set; }
+        
+        /// <summary>
+        /// Filter used to obtain documents.        
+        /// May include binding parameters.
+        /// </summary>
+        [AutoResolve]
+        public string Filter { get; set; }
 
         internal ConnectionSettings ToConnectionSettings()
         {

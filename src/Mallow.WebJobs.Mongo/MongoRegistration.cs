@@ -1,4 +1,5 @@
-﻿using Mallow.Azure.WebJobs.Extensions.Mongo.Collector;
+﻿using System.Collections.Generic;
+using Mallow.Azure.WebJobs.Extensions.Mongo.Collector;
 using Mallow.Azure.WebJobs.Extensions.Mongo.Connection;
 using Mallow.Azure.WebJobs.Extensions.Mongo.Converters;
 using Microsoft.Azure.WebJobs.Host.Bindings;
@@ -14,6 +15,7 @@ namespace Mallow.Azure.WebJobs.Extensions.Mongo
             
             var rule = context.AddBindingRule<MongoAttribute>();
             rule.BindToCollector<OpenType.Poco>(typeof(MongoCollectorBuilder<>), mongoCollectionFactory);
+            rule.BindToInput<IEnumerable<OpenType.Poco>>(typeof(MongoEnumerableConverter<>), mongoCollectionFactory);
             rule.BindToInput<OpenType.Poco>(typeof(MongoDocumentConverter<>), mongoCollectionFactory);
         }
     }
