@@ -1,9 +1,7 @@
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Mallow.WebJobs.Mongo.IntegrationTests.Base;
-using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Driver;
 using Xunit;
@@ -38,6 +36,10 @@ namespace Mallow.WebJobs.Mongo.IntegrationTests
             documents.Should().BeEquivalentTo(data);
         }
         
+        // ReSharper disable UnusedMember.Local
+        // ReSharper disable AutoPropertyCanBeMadeGetOnly.Local
+        // ReSharper disable UnusedAutoPropertyAccessor.Local
+        // ReSharper disable MemberCanBePrivate.Local
         [BsonIgnoreExtraElements]
         private class TestDocument
         {

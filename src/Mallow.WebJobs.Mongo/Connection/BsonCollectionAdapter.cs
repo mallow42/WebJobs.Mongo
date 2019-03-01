@@ -14,6 +14,11 @@ namespace Mallow.Azure.WebJobs.Extensions.Mongo.Connection
         {
             _collection = collection;
         }
+        
+        public Task<List<BsonDocument>> FindAsync(FilterDefinition<BsonDocument> filter, CancellationToken token)
+        {
+            return _collection.Find(filter).ToListAsync(token);
+        }
 
         public Task<BsonDocument> FindOneOrDefaultAsync(FilterDefinition<BsonDocument> filter, CancellationToken token)
         {

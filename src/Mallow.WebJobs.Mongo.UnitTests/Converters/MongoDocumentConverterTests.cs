@@ -1,8 +1,8 @@
 using System.Threading;
 using System.Threading.Tasks;
 using FluentAssertions;
-using Mallow.Azure.WebJobs.Extensions.Mongo;
 using Mallow.Azure.WebJobs.Extensions.Mongo.Converters;
+using Mallow.WebJobs.Mongo.UnitTests.Base;
 using Mallow.WebJobs.Mongo.UnitTests.Fakes;
 using MongoDB.Bson;
 using Xunit;
@@ -25,7 +25,7 @@ namespace Mallow.WebJobs.Mongo.UnitTests.Converters
         [Fact]
         public async Task ConvertAsync_MongoAttributeWithExistingObjectId_ReturnsCorrectDocument()
         {
-            var mongoAttribute = CreateMongoAttribute(OBJECT_ID);
+            var mongoAttribute = MongoAttributeFactory.CreateWithId(OBJECT_ID);
             var converter = new MongoDocumentConverter<TestDocumentWithObjectId>(_mongoCollectionFactory);
             var document = new TestDocumentWithObjectId()
             {
@@ -41,7 +41,7 @@ namespace Mallow.WebJobs.Mongo.UnitTests.Converters
         [Fact]
         public async Task ConvertAsync_MongoAttributeWithExistingId_ReturnsCorrectDocument()
         {
-            var mongoAttribute = CreateMongoAttribute("id256");
+            var mongoAttribute = MongoAttributeFactory.CreateWithId("id256");
             var converter = new MongoDocumentConverter<TestDocumentWithStringId>(_mongoCollectionFactory);
             var document = new TestDocumentWithStringId()
             {
@@ -58,25 +58,14 @@ namespace Mallow.WebJobs.Mongo.UnitTests.Converters
         [Fact]
         public async Task ConvertAsync_MongoAttributeWithNonExistingId_ReturnsNull()
         {
-            var mongoAttribute = CreateMongoAttribute(OBJECT_ID);
+            var mongoAttribute = MongoAttributeFactory.CreateWithId(OBJECT_ID);
             var converter = new MongoDocumentConverter<TestDocumentWithObjectId>(_mongoCollectionFactory);
 
             var result = await converter.ConvertAsync(mongoAttribute, CancellationToken.None);
 
             result.Should().BeNull();
         }
-        
-        private static MongoAttribute CreateMongoAttribute(string id)
-        {
-            return new MongoAttribute()
-            {
-                DatabaseId = "DatabaseA",
-                CollectionId = "CollectionA",
-                ConnectionString = "mongodb://localhost:27017",
-                Id = id
-            };
-        }
-        
+
         // ReSharper disable MemberCanBePrivate.Local
         // ReSharper disable UnusedAutoPropertyAccessor.Local
         private class TestDocumentWithObjectId

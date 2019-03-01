@@ -24,6 +24,19 @@ public static Task<IActionResult> GetDocumentById
 }
 ```
 
+Example azure function that can be used to obtain multiple documents using filter. Where filter is standard MongoDB [query](https://docs.mongodb.com/manual/tutorial/query-documents/).
+
+```csharp
+public static Task<IActionResult> GetDocuments
+(
+    [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)] HttpRequest req,
+    [Mongo(DatabaseId = "TestDb", CollectionId = "Collection", ConnectionString = "%ConnectionString%", Filter = "{Query.filter}")] IEnumerable<TestDocument> input
+)
+{
+    return Task.FromResult<IActionResult>(new OkObjectResult(input));
+}
+```
+
 ### Output binding
 
 Example azure function that can be used to create multiple new documents.
