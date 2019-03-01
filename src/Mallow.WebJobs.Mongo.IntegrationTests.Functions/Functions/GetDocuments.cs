@@ -24,6 +24,13 @@ namespace Mallow.WebJobs.Mongo.IntegrationTests.Functions.Functions
             public ObjectId Id { get; set; }
             
             public string Name { get; set; }
+
+            public NestedTestDocument Nested { get; set; }
+        }
+        
+        public class NestedTestDocument
+        {
+            public int Size { get; set; }
         }
     }
 }
