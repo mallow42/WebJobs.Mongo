@@ -8,15 +8,15 @@ using Xunit;
 
 namespace Mallow.WebJobs.Mongo.UnitTests.Collector
 {
-    public class MongoCollectorTests
+    public class MongoCreateCollectorTests
     {
-        private readonly MongoCollector<TestDocument> _collector;
+        private readonly MongoCreateCollector<TestDocument> _collector;
         private readonly CollectionFake _mongoCollection;
 
-        public MongoCollectorTests()
+        public MongoCreateCollectorTests()
         {
             _mongoCollection = new CollectionFake();
-            _collector = new MongoCollector<TestDocument>(_mongoCollection);
+            _collector = new MongoCreateCollector<TestDocument>(_mongoCollection);
         }
 
         [Fact]

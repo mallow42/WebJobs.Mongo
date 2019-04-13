@@ -7,12 +7,12 @@ using MongoDB.Bson;
 
 namespace Mallow.Azure.WebJobs.Extensions.Mongo.Collector
 {
-    internal class MongoCollector<T> : IAsyncCollector<T>
+    internal class MongoCreateCollector<T> : IAsyncCollector<T>
     {
         private readonly ConcurrentQueue<BsonDocument> _documents = new ConcurrentQueue<BsonDocument>();
         private readonly IBsonCollection _collection;
 
-            public MongoCollector(IBsonCollection collection)
+            public MongoCreateCollector(IBsonCollection collection)
         {
             _collection = collection;
         }

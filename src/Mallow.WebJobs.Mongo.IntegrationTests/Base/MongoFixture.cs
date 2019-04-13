@@ -41,6 +41,16 @@ namespace Mallow.WebJobs.Mongo.IntegrationTests.Base
             return _collectionName ?? CreateCollectionName(testName);
         }
 
+        public string GetDatabaseId()
+        {
+            return DATABASE_ID;
+        }
+        
+        public string GetConnectionString()
+        {
+            return CONNECTION_STRING;
+        }
+
         public void Dispose()
         {
             if (_collectionName != null)

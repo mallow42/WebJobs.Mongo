@@ -38,6 +38,9 @@ namespace Mallow.Azure.WebJobs.Extensions.Mongo
         /// </summary>
         [AutoResolve]
         public string Id { get; set; }
+
+
+        public InsertMode Mode { get; set; } = InsertMode.Create;
         
         /// <summary>
         /// Filter used to obtain documents.        
@@ -50,5 +53,13 @@ namespace Mallow.Azure.WebJobs.Extensions.Mongo
         {
             return new ConnectionSettings(ConnectionString, DatabaseId, CollectionId);
         }
+    }
+
+    public enum InsertMode
+    {
+        NotSet = 0,
+        Create = 1,
+        Replace = 2,
+        CreateOrReplace = 3
     }
 }

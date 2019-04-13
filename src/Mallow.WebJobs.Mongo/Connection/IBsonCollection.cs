@@ -13,5 +13,9 @@ namespace Mallow.Azure.WebJobs.Extensions.Mongo.Connection
         Task<BsonDocument> FindOneOrDefaultAsync(FilterDefinition<BsonDocument> filter, CancellationToken token);
 
         Task InsertManyAsync(IEnumerable<BsonDocument> documents, CancellationToken token);
+        
+        Task UpsertOneAsync(FilterDefinition<BsonDocument> filter, BsonDocument document, CancellationToken token);
+        
+        Task ReplaceOneAsync(FilterDefinition<BsonDocument> filter, BsonDocument document, CancellationToken token);
     }
 }

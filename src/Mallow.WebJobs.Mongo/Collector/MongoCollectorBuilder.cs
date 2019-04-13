@@ -1,4 +1,5 @@
-﻿using Mallow.Azure.WebJobs.Extensions.Mongo.Connection;
+﻿using System;
+using Mallow.Azure.WebJobs.Extensions.Mongo.Connection;
 using Microsoft.Azure.WebJobs;
 
 namespace Mallow.Azure.WebJobs.Extensions.Mongo.Collector
@@ -15,7 +16,17 @@ namespace Mallow.Azure.WebJobs.Extensions.Mongo.Collector
         public IAsyncCollector<T> Convert(MongoAttribute attribute)
         {
             var collection = _factory.Create(attribute.ToConnectionSettings());
-            return new MongoCollector<T>(collection);
+            switch (attribute.Mode)
+            {
+                case InsertMode.Create:
+                    return new MongoCreateCollector<T>(collection);
+                case InsertMode.Replace:
+                    return new MongoReplaceCollector<T>(collection);
+                case InsertMode.CreateOrReplace:
+                    return new MongoInsertOrReplaceCollector<T>(collection);
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
     }
 }
