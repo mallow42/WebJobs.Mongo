@@ -3,6 +3,8 @@
 
 var target = Argument("target", "Default");
 
+const string integrationTestsFolder =  "./Mallow.WebJobs.Mongo.IntegrationTests";
+
 Task("Build")
     .Does(() => {
         DotNetCoreBuild("./",  new DotNetCoreBuildSettings
@@ -36,34 +38,26 @@ Task("RunIntegrationTests")
     .IsDependentOn("PublishIntegrationTestsFunctions")
     .Does(() =>
     {
-        var original = Context.Environment.WorkingDirectory;
-
-        try
+        DockerComposeDown(new DockerComposeDownSettings(){
+            WorkingDirectory = integrationTestsFolder,
+        });
+        DockerComposeUp(new DockerComposeUpSettings()
         {
-            Context.Environment.WorkingDirectory = MakeAbsolute(Directory("./Mallow.WebJobs.Mongo.IntegrationTests"));
-            DockerComposeDown();
-
-            var settings = new DockerComposeUpSettings()
-            {
-                DetachedMode = true,
-                Build = true,
-                ForceRecreate = true
-            };
-            DockerComposeUp(settings);
-            DotNetCoreTest();
-        }
-        finally
-        {
-            DockerComposeDown();
-            Context.Environment.WorkingDirectory = original;
-        }
+            WorkingDirectory = integrationTestsFolder,
+            DetachedMode = true,
+            Build = true,
+            ForceRecreate = true
+        });
+        DotNetCoreTest();
+    })
+    .Finally(() => {
+        DockerComposeDown(new DockerComposeDownSettings(){
+            WorkingDirectory = integrationTestsFolder,
+        });
     });
 
 Task("Default")
     .IsDependentOn("RunUnitTests")
-    .IsDependentOn("RunIntegrationTests")
-    .Does(() => {
-    
-    });
+    .IsDependentOn("RunIntegrationTests");
 
 RunTarget(target);
