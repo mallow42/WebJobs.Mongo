@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Xunit;
 
-namespace Mallow.WebJobs.Mongo.IntegrationTests
+namespace Mallow.WebJobs.Mongo.IntegrationTests.Functions
 {
     public class EnumerableInputBindingTests : IDisposable
     {

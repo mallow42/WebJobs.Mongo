@@ -6,7 +6,7 @@ using Mallow.WebJobs.Mongo.IntegrationTests.Base;
 using MongoDB.Bson;
 using Xunit;
 
-namespace Mallow.WebJobs.Mongo.IntegrationTests
+namespace Mallow.WebJobs.Mongo.IntegrationTests.Functions
 {
     public class InputBindingTests : IDisposable
     {

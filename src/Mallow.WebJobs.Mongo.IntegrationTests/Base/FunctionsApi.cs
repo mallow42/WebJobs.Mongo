@@ -40,6 +40,15 @@ namespace Mallow.WebJobs.Mongo.IntegrationTests.Base
                            .CreateRequestResult<JObject>();
         }
 
+        public Task<RequestResult<JObject>> InsertOrCreateNewDocuments(string collectionName, object data)
+        {
+            return BASE_URL.AppendPathSegment("InsertOrCreateNewDocuments")
+                           .SetQueryParam("collection", collectionName)
+                           .AllowAnyHttpStatus()
+                           .PostJsonAsync(data)
+                           .CreateRequestResult<JObject>();
+        }
+
         public Task<RequestResult<IEnumerable<T>>> GetDocuments<T>(string collectionName, string filter)
         {
             return BASE_URL.AppendPathSegment("GetDocuments")
