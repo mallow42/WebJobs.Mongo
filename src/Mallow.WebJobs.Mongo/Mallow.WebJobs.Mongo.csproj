@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>Mallow.Azure.WebJobs.Extensions.Mongo</RootNamespace>
-    <PackageVersion>1.0.0-beta2</PackageVersion>
+    <PackageVersion>1.1.0</PackageVersion>
     <Authors>Mallow42</Authors>
     <Description>Provides basic bindigs for MongoDB</Description>
     <PackageProjectUrl>https://github.com/mallow42/WebJobs.Mongo</PackageProjectUrl>
