@@ -54,13 +54,15 @@ namespace Mallow.WebJobs.Mongo.IntegrationTests.Functions
         }
 
         [Fact]
-        public async Task Test()
+        public async Task InsertOrCreateNewDocuments_ExistingDocuments_InsertsAllDocuments()
         {
             var collection = _mongoFixture.CreateCollection<TestDocumentWithId>();
             await collection.InsertOneAsync(new TestDocumentWithId("A", "id-1"));
+            await collection.InsertOneAsync(new TestDocumentWithId("B", "id-2"));
             var data = new[]
             {
-                new TestDocumentWithId("B", "id-1"), 
+                new TestDocumentWithId("B", "id-1"),
+                new TestDocumentWithId("C", "id-2"), 
             };
             
             var result = await _functionsApi.InsertOrCreateNewDocuments(_mongoFixture.GetCollectionName(), data);
