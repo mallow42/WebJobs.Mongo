@@ -26,11 +26,8 @@ namespace Mallow.WebJobs.Mongo.UnitTests.Converters
         public async Task ConvertAsync_MongoAttributeWithExistingObjectId_ReturnsCorrectDocument()
         {
             var mongoAttribute = MongoAttributeFactory.CreateWithId(OBJECT_ID);
-            var converter = new MongoDocumentConverter<TestDocumentWithObjectId>(_mongoCollectionFactory);
-            var document = new TestDocumentWithObjectId()
-            {
-                Id = ObjectId.Parse(OBJECT_ID)
-            };
+            var converter = new MongoDocumentConverter<TestDocumentWithId<ObjectId>>(_mongoCollectionFactory);
+            var document = new TestDocumentWithId<ObjectId>("A", ObjectId.Parse(OBJECT_ID));
             _collectionFake.AddDocument(document);
 
             var result = await converter.ConvertAsync(mongoAttribute, CancellationToken.None);
@@ -42,11 +39,8 @@ namespace Mallow.WebJobs.Mongo.UnitTests.Converters
         public async Task ConvertAsync_MongoAttributeWithExistingId_ReturnsCorrectDocument()
         {
             var mongoAttribute = MongoAttributeFactory.CreateWithId("id256");
-            var converter = new MongoDocumentConverter<TestDocumentWithStringId>(_mongoCollectionFactory);
-            var document = new TestDocumentWithStringId()
-            {
-                Id = "id256"
-            };
+            var converter = new MongoDocumentConverter<TestDocumentWithId<string>>(_mongoCollectionFactory);
+            var document = new TestDocumentWithId<string>("A", "id256");
             _collectionFake.AddDocument(document);
             
 
@@ -59,23 +53,11 @@ namespace Mallow.WebJobs.Mongo.UnitTests.Converters
         public async Task ConvertAsync_MongoAttributeWithNonExistingId_ReturnsNull()
         {
             var mongoAttribute = MongoAttributeFactory.CreateWithId(OBJECT_ID);
-            var converter = new MongoDocumentConverter<TestDocumentWithObjectId>(_mongoCollectionFactory);
+            var converter = new MongoDocumentConverter<TestDocumentWithId<ObjectId>>(_mongoCollectionFactory);
 
             var result = await converter.ConvertAsync(mongoAttribute, CancellationToken.None);
 
             result.Should().BeNull();
-        }
-
-        // ReSharper disable MemberCanBePrivate.Local
-        // ReSharper disable UnusedAutoPropertyAccessor.Local
-        private class TestDocumentWithObjectId
-        {
-            public ObjectId Id { get; set; }
-        }
-        
-        private class TestDocumentWithStringId
-        {
-            public string Id { get; set; }
         }
     }
 }
