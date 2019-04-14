@@ -3,7 +3,6 @@ using FluentAssertions;
 using Mallow.Azure.WebJobs.Extensions.Mongo.Converters;
 using Mallow.WebJobs.Mongo.UnitTests.Base;
 using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
 using Xunit;
 
 namespace Mallow.WebJobs.Mongo.UnitTests.Converters
@@ -92,32 +91,6 @@ namespace Mallow.WebJobs.Mongo.UnitTests.Converters
             action.Should().Throw<InvalidOperationException>();
         }
         
-        // ReSharper disable UnusedMember.Local
-        // ReSharper disable AutoPropertyCanBeMadeGetOnly.Local
-        // ReSharper disable UnusedAutoPropertyAccessor.Local
-        // ReSharper disable MemberCanBePrivate.Local
-        [BsonIgnoreExtraElements]
-        private class TestDocument
-        {
-            public string Name { get; }
-
-            public TestDocument(string name)
-            {
-                Name = name;
-            }
-        }
         
-        private class TestDocumentWithId<T>
-        {
-            public string Name { get; }
-            
-            public T Id { get; }
-
-            public TestDocumentWithId(string name, T id)
-            {
-                Name = name;
-                Id = id;
-            }
-        }
     }
 }
