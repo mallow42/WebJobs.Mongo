@@ -39,7 +39,9 @@ namespace Mallow.Azure.WebJobs.Extensions.Mongo
         [AutoResolve]
         public string Id { get; set; }
 
-
+        /// <summary>
+        /// Sets mode that is used when creating/replacing document.
+        /// </summary>
         public InsertMode Mode { get; set; } = InsertMode.Create;
         
         /// <summary>
@@ -53,13 +55,5 @@ namespace Mallow.Azure.WebJobs.Extensions.Mongo
         {
             return new ConnectionSettings(ConnectionString, DatabaseId, CollectionId);
         }
-    }
-
-    public enum InsertMode
-    {
-        NotSet = 0,
-        Create = 1,
-        Replace = 2,
-        CreateOrReplace = 3
     }
 }
