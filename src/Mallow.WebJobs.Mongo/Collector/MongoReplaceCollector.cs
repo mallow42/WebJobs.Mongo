@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using Mallow.Azure.WebJobs.Extensions.Mongo.Connection;
 using Mallow.Azure.WebJobs.Extensions.Mongo.Converters;
 using Microsoft.Azure.WebJobs;
-using MongoDB.Bson;
 
 namespace Mallow.Azure.WebJobs.Extensions.Mongo.Collector
 {
@@ -18,10 +17,9 @@ namespace Mallow.Azure.WebJobs.Extensions.Mongo.Collector
 
         public Task AddAsync(T item, CancellationToken cancellationToken)
         {
-            var bsonDocument = item.ToBsonDocument();
-            var filter = FilterBuilder.CreateFilterByDocumentId(bsonDocument);
-            bsonDocument.Remove(FilterBuilder.ID_FIELD);
-            return _collection.ReplaceOneAsync(filter, bsonDocument, cancellationToken);
+            var update = UpdateBuilder.CreateUpdate(item);
+            var filter = FilterBuilder.CreateFilter(update.Id);
+            return _collection.ReplaceOneAsync(filter, update.Update, cancellationToken);
         }
 
         public Task FlushAsync(CancellationToken cancellationToken)
