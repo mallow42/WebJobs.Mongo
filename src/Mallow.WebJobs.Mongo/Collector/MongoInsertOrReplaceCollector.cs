@@ -18,8 +18,7 @@ namespace Mallow.Azure.WebJobs.Extensions.Mongo.Collector
         public Task AddAsync(T item, CancellationToken cancellationToken)
         {
             var update = UpdateBuilder.CreateUpdate(item);
-            var filter = FilterBuilder.CreateFilter(update.Id);
-            return _collection.UpsertOneAsync(filter, update.Update, cancellationToken);
+            return _collection.UpsertOneAsync(update.Filter, update.Update, cancellationToken);
         }
 
         public Task FlushAsync(CancellationToken cancellationToken)

@@ -10,12 +10,19 @@ namespace Mallow.Azure.WebJobs.Extensions.Mongo.Converters
             var document = item.ToBsonDocument();
             if (document.Contains(FilterBuilder.ID_FIELD))
             {
-                var id = BsonTypeMapper.MapToDotNetValue(document[FilterBuilder.ID_FIELD]);
-                document.Remove(FilterBuilder.ID_FIELD);
-                return new DocumentUpdate(document, id);
+                return CreateUpdate(document);
             }
             
             throw new InvalidOperationException("Document must contain id property");
+        }
+
+        private static DocumentUpdate CreateUpdate(BsonDocument document)
+        {
+            var id = BsonTypeMapper.MapToDotNetValue(document[FilterBuilder.ID_FIELD]);
+            document.Remove(FilterBuilder.ID_FIELD);
+            var filter = FilterBuilder.CreateFilter(id);
+            
+            return new DocumentUpdate(document, filter);
         }
     }
 }

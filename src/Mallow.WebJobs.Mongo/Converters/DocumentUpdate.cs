@@ -1,4 +1,5 @@
 using MongoDB.Bson;
+using MongoDB.Driver;
 
 namespace Mallow.Azure.WebJobs.Extensions.Mongo.Converters
 {
@@ -6,12 +7,12 @@ namespace Mallow.Azure.WebJobs.Extensions.Mongo.Converters
     {
         public BsonDocument Update { get; }
         
-        public object Id { get; }
+        public FilterDefinition<BsonDocument> Filter { get; }
 
-        public DocumentUpdate(BsonDocument update, object id)
+        public DocumentUpdate(BsonDocument update, FilterDefinition<BsonDocument> filter)
         {
             Update = update;
-            Id = id;
+            Filter = filter;
         }
     }
 }
