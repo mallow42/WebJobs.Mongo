@@ -40,7 +40,7 @@ namespace Mallow.Azure.WebJobs.Extensions.Mongo
         public string Id { get; set; }
 
         /// <summary>
-        /// Sets mode that is used when creating/replacing document.
+        /// Sets mode that is used when creating/replacing document. Default is <see cref="InsertMode.Create"/>.
         /// </summary>
         public InsertMode Mode { get; set; } = InsertMode.Create;
         
