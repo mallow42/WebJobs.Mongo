@@ -2,6 +2,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Mallow.Azure.WebJobs.Extensions.Mongo.Collector;
+using Mallow.WebJobs.Mongo.UnitTests.Base;
 using Mallow.WebJobs.Mongo.UnitTests.Converters;
 using Mallow.WebJobs.Mongo.UnitTests.Fakes;
 using MongoDB.Bson;

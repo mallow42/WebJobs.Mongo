@@ -1,21 +1,18 @@
 using MongoDB.Bson.Serialization.Attributes;
+
 // ReSharper disable UnusedAutoPropertyAccessor.Global
 // ReSharper disable MemberCanBePrivate.Global
 
-namespace Mallow.WebJobs.Mongo.UnitTests.Converters
+namespace Mallow.WebJobs.Mongo.UnitTests.Base
 {
     [BsonIgnoreExtraElements]
-    internal class TestDocumentWithId<T>
+    internal class TestDocument
     {
         public string Name { get; }
-            
-        // ReSharper disable once MemberCanBePrivate.Global
-        public T Id { get; }
 
-        public TestDocumentWithId(string name, T id)
+        public TestDocument(string name)
         {
             Name = name;
-            Id = id;
         }
     }
 }
