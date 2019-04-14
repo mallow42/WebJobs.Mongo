@@ -58,6 +58,28 @@ public static async Task<IActionResult> InsertNewDocuments
 }
 ```
 
+Example azure function that can be used to create/replace multiple new documents.
+
+```csharp
+public static async Task<IActionResult> InsertNewDocuments
+(
+    [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = null)] HttpRequestMessage  req,
+    [Mongo(DatabaseId = "TestDb",
+           CollectionId = "Collection",
+           ConnectionString = "%MongoConnectionString%",
+           Mode = InsertMode.CreateOrReplace)] IAsyncCollector<AsyncCollectorTestDocument> collector
+)
+{
+    var documents = await req.Content.ReadAsAsync<Document[]>();
+    foreach (var document in documents)
+    {
+        await collector.AddAsync(document);
+    }
+
+    return new OkObjectResult(new {Status = "OK"});
+}
+```
+
 ## License
 
 [the MIT License](LICENSE)
