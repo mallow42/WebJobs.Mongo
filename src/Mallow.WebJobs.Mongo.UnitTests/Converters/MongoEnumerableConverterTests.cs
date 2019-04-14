@@ -34,26 +34,12 @@ namespace Mallow.WebJobs.Mongo.UnitTests.Converters
         public async Task ConvertAsync_FilterMultipleDocuments_ReturnsAllDocuments()
         {
             var mongoAttribute = MongoAttributeFactory.CreateWithFilter("{\"Name\" : \"A\"}");
-            var document = new TestDocument()
-            {
-                Name = "A"
-            };
+            var document = new TestDocument("A");
             _collectionFake.AddDocuments(mongoAttribute.Filter, document, document);
 
             var result = await _converter.ConvertAsync(mongoAttribute, CancellationToken.None);
 
             result.Should().BeEquivalentTo(document, document);
-        }
-
-        // ReSharper disable MemberCanBePrivate.Local
-        // ReSharper disable UnusedAutoPropertyAccessor.Local
-        // ReSharper disable once UnusedMember.Local
-        private class TestDocument
-        {
-            
-            public ObjectId Id { get; set; }
-            
-            public string Name { get; set; }
         }
     }
 }
